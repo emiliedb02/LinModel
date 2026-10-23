@@ -1,6 +1,6 @@
 ---
 title: "Linear Model with Prediction"
-author: "Dr. J"
+author: "Emilie Bravo"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -36,19 +36,28 @@ head(mtcars)
 
 ## data summary
 ### graphical summary
+```{r}
+plot(mpg~wt,data=mtcars, pch=19)
+grid()
+```
+
+As weight increases, the mpg decreases.
 
 ### numerical summary
+```{r}
+cor(mtcars$mpg, mtcars$wt)
+```
+
+The value is very close to -1.0, an inverse linear relationship.
 
 ### model summary
-
 ```{r}
 model1 <- lm(mpg ~ wt, data = mtcars)
+
 summary(model1)
 ```
-```{r}
-newData = data.frame(wt=3.050, disp=122)
-print(predict(model1, newData, interval = 'predict'))
-```
+
+The vehicle weight has a strong, negative relationship with MPG.
 
 ### predicted mpg
 
@@ -59,8 +68,19 @@ print(predict(model1, newData, interval = 'predict'))
 
 ## data summary
 ### graphical summary
+```{r}
+plot(mpg~disp,data=mtcars, pch=19)
+grid()
+```
+
+Similar to the relationship with mpg and wt, the more mpg increases, the more disp decreases.
 
 ### numerical summary
+```{r}
+cor(mtcars$mpg, mtcars$disp)
+```
+
+This number indicates a strong negative linear relationship.
 
 ### model summary
 
@@ -69,7 +89,8 @@ print(predict(model1, newData, interval = 'predict'))
 model2 <- lm(mpg ~ disp, data = mtcars)
 summary(model2)
 ```
-### predicted mpg 
+
+ The vehicles weight is a significant predictor of fuel efficiency, while engine displacement is not very significant at the standard level.
 
 # Model 3 :
 
@@ -81,7 +102,8 @@ summary(model2)
 ```{r}
 plot(mpg ~ wt+disp, data = mtcars)
 ```
-### numerical summary
+
+ The more the mpg increases, the more the weight decreases, and simular to the weight, the more mpg increases, the more the disp decreases.
 
 ### model summary
 model3= lm(mpg ~ wt+disp, data = mtcars)
@@ -94,21 +116,16 @@ summary(model3)
  mpg (miles per gallon) is the response (Y)
  wt (wt) and displacement (disp) are the predictors (X's)
 
-## data summary
-
-### graphical summary
-```{r}
-plot(mpg ~ wt+disp, data=mtcars)
-```
-### numerical summary
-
-### model summary
 
 # anova: compare models 2 and 3
 
-model3 <- lm(mpg ~ wt+disp, data = mtcars)
+```{r}
+model3 <- lm(mpg ~ wt, data = mtcars)
 
-model summary (coefficients, R², etc.)
+summary(model3)
+```
+
+The car's weight is a strong and great negative predictor of its fuel effiiency.
 
 ### predicted mpg
 
@@ -122,3 +139,5 @@ print(anova_result)
 ```
 
 # Discussion and Conculsions
+
+According to the data shown, the vehicle weight is a great negative predictor of the MPG, but engine disp is not as significant as vehicle weight when it comes to affecting MPG. The more the MPG increases, the more the weight decreases, and simular to the weight, the more the more the mpg increases, the more the disp decreases.
